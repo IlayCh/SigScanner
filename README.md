@@ -16,3 +16,8 @@ As an input, the program gets 2 arguments:
 make
 # Clean generated files
 make clean
+
+# Test the project
+#### $ make
+#### $ bin/find_sig /home test/crypty.sig
+#### ![running_example](https://github.com/IlayCh/SigScanner/assets/90407670/7ef4cf03-ae1b-48ca-8b3d-b12f08b82579)
