@@ -12,12 +12,14 @@ void FileContentScanner::scan(const fs::path &filePath) const
     if (!fileStream.is_open()) {
         throw LinuxErrorCodeException("Error opening file: " + filePath.string());
     }
-    std::string fileContent((std::istreambuf_iterator<char>(fileStream)), std::istreambuf_iterator<char>());
 
-    // Check if the signature exists in the file content
-    if (fileContent.find(m_stringToScan) != std::string::npos) {
-        std::stringstream log;
-        log << "File " << filePath << " is infected!";
-        ConsoleLogger::getInstance().Log(log.str());
+    std::string lineToRead;
+    while (std::getline(fileStream, lineToRead)) {
+        if (lineToRead.find(m_stringToScan) != std::string::npos) {
+            std::stringstream log;
+            log << "File " << filePath << " is infected!";
+            ConsoleLogger::getInstance().Log(log.str());
+            return;
+        }
     }
 }
